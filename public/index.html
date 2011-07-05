@@ -6,9 +6,9 @@
     <meta name="author" content="Enginimation Studio(enginimation.com)"/>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var lastEvents=io.connect('http://localhost/events:last'),
-            currentEvents=io.connect('http://localhost/events:now'),
-            lastEvents=io.connect('http://localhost/events:next');
+        var lastEvents=io.connect('http://localhost/eventsLast'),
+            currentEvents=io.connect('http://localhost/eventsNow'),
+            lastEvents=io.connect('http://localhost/eventsNext');
         lastEvents.on('news',function(data){
             console.log(data);
             socket.emit('my other event', { my: 'data' });
