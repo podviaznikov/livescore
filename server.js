@@ -28,7 +28,7 @@ io.sockets.of('/events:last'),on('connection',function(socket){
 io.sockets.of('/events:now'),on('connection',function(socket){
     sportsService.getLastFootballEvents(function(er,data){
         socket.emit('news',data);
-    }));
+    });
 
     socket.on('my other event',function (data) {
         console.log(data);
