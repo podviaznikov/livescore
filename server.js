@@ -19,13 +19,13 @@ app.configure(function(){
 util.log('Server started!');
 app.listen(80);
 
-io.of('/events:last'),on('connection',function(socket){
+io.of('/events:last').on('connection',function(socket){
     socket.emit('news',{ hello: 'world' });
     socket.on('my other event',function (data) {
         console.log(data);
     });
 });
-io.of('/events:now'),on('connection',function(socket){
+io.of('/events:now').on('connection',function(socket){
     sportsService.getLastFootballEvents(function(er,data){
         socket.emit('news',data);
     });
@@ -34,7 +34,7 @@ io.of('/events:now'),on('connection',function(socket){
         console.log(data);
     });
 });
-io.of('/events:next'),on('connection',function(socket){
+io.of('/events:next').on('connection',function(socket){
     socket.emit('news',{ hello: 'world' });
     socket.on('my other event',function (data) {
         console.log(data);
