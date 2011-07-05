@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>m.player</title>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Enginimation Studio(enginimation.com)"/>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
