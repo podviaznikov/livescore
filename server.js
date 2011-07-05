@@ -20,7 +20,6 @@ util.log('Server started!');
 app.listen(80);
 
 io.of('/eventsLast').on('connection',function(socket){
-    socket.emit('news',{ hello: 'world' });
     sportsService.getLastFootballEvents(function(er,data){
         console.log('SPORT EVENTS SHOULD BE SEND');
         socket.emit('news',data);
