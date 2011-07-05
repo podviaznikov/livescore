@@ -8,7 +8,7 @@
     <script>
         var lastEvents=io.connect('http://localhost/events:last'),
             currentEvents=io.connect('http://localhost/events:now'),
-            lastEvents=io.connect('http://localhost/events:next'),
+            lastEvents=io.connect('http://localhost/events:next');
         lastEvents.on('news',function(data){
             console.log(data);
             socket.emit('my other event', { my: 'data' });
