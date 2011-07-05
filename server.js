@@ -1,6 +1,7 @@
 var util=require('util'),
     express=require('express'),
     socketIo=require('socket.io'),
+    sportsService=require('./services/sports.service'),
     app=express.createServer(),
     io=socketIo.listen(app);
 
@@ -18,7 +19,22 @@ app.configure(function(){
 util.log('Server started!');
 app.listen(80);
 
-io.sockets.on('connection',function(socket){
+io.sockets.of('/events:last'),on('connection',function(socket){
+    socket.emit('news',{ hello: 'world' });
+    socket.on('my other event',function (data) {
+        console.log(data);
+    });
+});
+io.sockets.of('/events:now'),on('connection',function(socket){
+    sportsService.getLastFootballEvents(function(er,data){
+        socket.emit('news',data);
+    }));
+
+    socket.on('my other event',function (data) {
+        console.log(data);
+    });
+});
+io.sockets.of('/events:next'),on('connection',function(socket){
     socket.emit('news',{ hello: 'world' });
     socket.on('my other event',function (data) {
         console.log(data);
