@@ -24,22 +24,8 @@ io.of('/eventsLast').on('connection',function(socket){
         console.log('SPORT EVENTS SHOULD BE SEND');
         socket.emit('news',data);
     });
-    socket.on('my other event',function (data) {
-        console.log(data);
-    });
 });
 io.of('/eventsNow').on('connection',function(socket){
-    sportsService.getLastFootballEvents(function(er,data){
-        socket.emit('news',data);
-    });
-
-    socket.on('my other event',function (data) {
-        console.log(data);
-    });
 });
 io.of('/eventsNext').on('connection',function(socket){
-    socket.emit('news',{ hello: 'world' });
-    socket.on('my other event',function (data) {
-        console.log(data);
-    });
 });
