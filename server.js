@@ -21,14 +21,12 @@ sub.subscribe('lastevents')
 util.log('Server started!');
 app.listen(80);
 
-sub.on('message',function(pattern,key){
-    util.log(util.inspect(pattern));
-    util.log(util.inspect(key));
-});
 io.of('/eventsLast').on('connection',function(socket){
-    sportsService.getLastFootballEvents(function(er,data){
+    sub.on('message',function(pattern,key){
+        util.log(util.inspect(pattern));
+        util.log(util.inspect(key));
         console.log('SPORT EVENTS SHOULD BE SEND');
-        socket.emit('news',data);
+        socket.emit('news',key);
     });
 });
 io.of('/eventsNow').on('connection',function(socket){

@@ -1,4 +1,5 @@
-var fanfeedrData=require('./fanfeedr.data'),
+var util=require('util'),
+    fanfeedrData=require('./fanfeedr.data'),
     fanfeedr=require('fanfeedr'),
     redis=require('redis'),
     store=redis.createClient(),
@@ -22,9 +23,15 @@ scheduler.addAndRunJob('job1','00 */2 * * * *',function(){
                         away:eventParticipants[1].trim(),
                     },
                     eventDataStr=JSON.stringify(eventData);
-               store.sadd('lastevents',eventDataStr,redis.print);
+               store.sadd('lastevents_new',eventDataStr,redis.print);
             }
-            pub.publish('lastevents',eventDataStr);
+            store.sinter('lastevents_new','lastevents_old',function(err,result){
+                util.log('difference between new and old events');
+                util.log(util.inspect(result));
+                store.rename('lastevents_new','lastevents_old',redis.print);
+            });
+            pub.publish('lastevents','Hi');
         }
     });
 });
+util.log('started score results scrapper');
