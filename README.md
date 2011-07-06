@@ -1,7 +1,7 @@
-# fanfeedr-api
+# livescore
 
-Node.js API client for FanFeedr platform.
-It's more top level API than https://github.com/podviaznikov/fanfeedr
+Sample app which uses FanFeedr platform.
+It's uses https://github.com/podviaznikov/fanfeedr API.
 
 ## License
 
