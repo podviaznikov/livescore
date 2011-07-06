@@ -26,7 +26,7 @@ function getLastSportResults(){
                         home:eventParticipants[0].trim(),
                         away:eventParticipants[1].trim()
                     },
-                    events[i]=eventData;
+                    events[i]=eventData,
                     eventDataStr=JSON.stringify(eventData);
                store.sadd('lastevents_new',eventDataStr,redis.print);
             }
