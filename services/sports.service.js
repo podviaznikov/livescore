@@ -13,8 +13,7 @@ scheduler.addAndRunJob('job1','00 */2 * * * *',getLastSportResults);
 function getLastSportResults(){
     fanfeedr.lastSportEvents(fanfeedrData.sports.football,function(err,data){
         if(!err){
-            var events=[],
-                i=0;
+            var i=0;
             for(;i<data.length;i++){
                 var event=data[i],
                     eventId=event.id,
@@ -26,7 +25,6 @@ function getLastSportResults(){
                         home:eventParticipants[0].trim(),
                         away:eventParticipants[1].trim()
                     },
-                    events[i]=eventData,
                     eventDataStr=JSON.stringify(eventData);
                store.sadd('lastevents_new',eventDataStr,redis.print);
             }
