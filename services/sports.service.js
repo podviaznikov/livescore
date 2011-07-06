@@ -8,7 +8,7 @@ var util=require('util'),
 
 fanfeedr.init('9xcjyztzg8d9d24euvfz8fec','basic',true);
 
-scheduler.addAndRunJob('job1','00 */2 * * * *',getLastSportResults);
+scheduler.addAndRunJob('job1','00 */1 * * * *',getLastSportResults);
 
 function getLastSportResults(){
     fanfeedr.lastSportEvents(fanfeedrData.sports.football,function(err,data){
@@ -40,7 +40,7 @@ function handleDifferenceNewLastEvents(err,results){
     var i=0;
     for(;i<2;i++){
         var event=JSON.parse(results[i]);
-        util.log('Parsed='+util.isnpect(event));
+        util.log('Parsed='+util.inspect(event));
         fanfeedr.getEventDetails(event.id,function(er,data){
             event.status=data.status;
             event.score=data.home_team.score+':'+data.away_team.score;
