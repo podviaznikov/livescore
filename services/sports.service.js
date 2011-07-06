@@ -21,7 +21,7 @@ fanfeedr.lastSportEvents(fanfeedrData.sports.football,function(err,data){
                     away:eventParticipants[1].trim(),
                 };
 
-            client.sadd('lastevents',JSON.stringify(eventData));
+            client.sadd('lastevents',JSON.stringify(eventData),redis.print);
         }
     }
 });
