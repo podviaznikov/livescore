@@ -9,7 +9,7 @@ exports.getLastFootballEvents=function(callback){
     fanfeedr.lastSportEvents(fanfeedrData.sports.football,callback);
 };
 
-scheduler.addJobAndRun('job1','* */1 * * * *',function(){
+scheduler.addAndRunJob('job1','* */1 * * * *',function(){
     fanfeedr.lastSportEvents(fanfeedrData.sports.football,function(err,data){
         if(!err){
             for(var i=0;i<data.length;i++){
