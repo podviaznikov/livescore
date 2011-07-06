@@ -1,7 +1,8 @@
 var util=require('util'),
     express=require('express'),
     socketIo=require('socket.io'),
-    sportsService=require('./services/sports.service'),
+    redis=require('redis'),
+    sub=redis.createClient(),
     app=express.createServer(),
     io=socketIo.listen(app);
 
@@ -16,9 +17,14 @@ app.configure(function(){
     app.use(express.static(__dirname+'/public'));
 });
 
+sub.subscribe('lastevents')
 util.log('Server started!');
 app.listen(80);
 
+sub.on('message',function(pattern,key){
+    util.log(util.inspect(pattern));
+    util.log(util.inspect(key));
+});
 io.of('/eventsLast').on('connection',function(socket){
     sportsService.getLastFootballEvents(function(er,data){
         console.log('SPORT EVENTS SHOULD BE SEND');
