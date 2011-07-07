@@ -1,7 +1,14 @@
 $(function(){
     ui.AppView=Backbone.View.extend({
         el:$('body'),
-
+        initialize:function(){
+            this.latestEvents=new models.LatestEvents();
+            this.latestEvents.bind('add',this.addLatestEvent);
+        },
+        addLatestEvent:function(event){
+            var view=new ui.LatestEventView({model:event});
+            $(this.el).append(view.render().el);
+        }
     });
 
     ui.LatestEventView=Backbone.View.extends({
