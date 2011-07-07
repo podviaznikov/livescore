@@ -1,3 +1,4 @@
+var ui={};
 $(function(){
     ui.AppView=Backbone.View.extend({
         el:$('body'),

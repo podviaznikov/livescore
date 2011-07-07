@@ -1,7 +1,6 @@
 /*global Backbone: true, ui: true, _:true,localStorage : true */
 "use strict";
-var models={},ui={},
-    AppController={
+var AppController={
     init:function(){
         this.appView=new ui.AppView();
         var lastEvents=io.connect('http://localhost/eventsLast'),
