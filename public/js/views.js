@@ -16,6 +16,9 @@ $(function(){
         tagName:'section',
         className:'latest_result',
         tpl:$('#latest_result_tpl').html(),
+        initialize:function(){
+            _.bindAll(this,'render');
+        },
         render:function(){
             var html=_.template(this.tpl,{
                 score:this.model.get('score'),
