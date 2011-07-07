@@ -3,6 +3,7 @@ $(function(){
         el:$('#results'),
         initialize:function(){
             this.latestEvents=new models.LatestEvents();
+            _.bindAll(this,'addLatestEvent');
             this.latestEvents.bind('add',this.addLatestEvent);
         },
         addLatestEvent:function(event){
