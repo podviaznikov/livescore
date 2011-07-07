@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>LiveScore</title>
     <meta charset="utf-8"/>
     <meta name="author" content="Enginimation Studio(enginimation.com)"/>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var lastEvents=io.connect('http://localhost/eventsLast'),
-            currentEvents=io.connect('http://localhost/eventsNow'),
-            nextEvents=io.connect('http://localhost/eventsNext');
-        lastEvents.on('result',function(data){
-            console.log(data);
-        });
-    </script>
-</head>
+    <meta name="description" content="Description"/>
+    <meta name="keywords" content="html5,css3"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+    <script src="js/libs.bundle.js"></script>
+    <script src="js/models.js"></script>
+    <script src="js/views.js"></script>
+    <script src="js/controller.js"></script>
+    <script>$(function(){AppController.init();});</script>
 <body>
+<h1>TELETEXT</h1>
 <output id="result">
-
 </output>
+<script type="html/template" id="latest_result_tpl">
+    <span><%= home =></span><span><%= away =></span><span><%= score =></span>
+</script>
 </body>
 </html>

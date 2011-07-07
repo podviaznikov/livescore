@@ -1,0 +1,1 @@
+models.LatestEvent=Backbone.Model.extend({});

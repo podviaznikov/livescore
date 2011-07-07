@@ -1,0 +1,18 @@
+@font-face
+{
+    font-family:Header Teletext; src: url('header.ttf');
+}
+@font-face
+{
+    font-family:Regular Teletext; src: url('text.ttf');
+}
+body
+{
+    font-family:Regular Teletext;
+    background-color:black;
+    color:green;
+}
+h1
+{
+    font-family:Header Teletext;
+}
