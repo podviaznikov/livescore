@@ -10,7 +10,7 @@ var ui={},
         lastEvents.on('result',function(data){
            console.log(data);
            var latestEvent=new models.LatestEvent(JSON.parse(data));
-           appView.latestEvents.add(latestEvent);
+           AppController.appView.latestEvents.add(latestEvent);
         });
 
     }
