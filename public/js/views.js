@@ -11,8 +11,8 @@ $(function(){
         }
     });
 
-    ui.LatestEventView=Backbone.View.extends({
-        tagName:'section'
+    ui.LatestEventView=Backbone.View.extend({
+        tagName:'section',
         className:'latest_result',
         tpl:$('#latest_result_tpl').html(),
         render:function(){
