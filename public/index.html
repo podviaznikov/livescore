@@ -9,11 +9,14 @@
         var lastEvents=io.connect('http://localhost/eventsLast'),
             currentEvents=io.connect('http://localhost/eventsNow'),
             nextEvents=io.connect('http://localhost/eventsNext');
-        lastEvents.on('news',function(data){
+        lastEvents.on('result',function(data){
             console.log(data);
         });
     </script>
 </head>
 <body>
+<output id="result">
+
+</output>
 </body>
 </html>

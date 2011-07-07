@@ -2,6 +2,7 @@ var util=require('util'),
     express=require('express'),
     socketIo=require('socket.io'),
     redis=require('redis'),
+    store=redis.createClient(),
     sub=redis.createClient(),
     app=express.createServer(),
     io=socketIo.listen(app);
@@ -22,11 +23,16 @@ util.log('Server started!');
 app.listen(80);
 
 io.of('/eventsLast').on('connection',function(socket){
+    store.smembers('lastevents_full',function(err,events){
+        events.forEach(function(event,index){
+            socket.emit('result',event);
+        });
+    });
     sub.on('message',function(pattern,key){
         util.log(util.inspect(pattern));
         util.log(util.inspect(key));
         console.log('SPORT EVENT SHOULD BE SEND');
-        socket.emit('news',key);
+        socket.emit('result',key);
     });
 });
 io.of('/eventsNow').on('connection',function(socket){
