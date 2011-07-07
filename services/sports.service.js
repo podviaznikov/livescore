@@ -43,7 +43,7 @@ function handleDifferenceNewLastEvents(err,results){
         fanfeedr.getEventDetails(event.id,function(er,data){
             event.status=data.status;
             event.score=data.home_team.score+':'+data.away_team.score;
-            var eventSerialized=JSON.stringify(event)l
+            var eventSerialized=JSON.stringify(event);
             store.sadd('lastevents_full',eventSerialized);
             pub.publish('lastevents',eventSerialized);
         });
