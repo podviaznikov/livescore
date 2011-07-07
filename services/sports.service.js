@@ -29,24 +29,25 @@ function getLastSportResults(){
                store.sadd('lastevents_new',eventDataStr,redis.print);
             }
             store.sinter('lastevents_new','lastevents_old',handleDifferenceNewLastEvents);
-            pub.publish('lastevents','Hi');
         }
     });
 };
 
 function handleDifferenceNewLastEvents(err,results){
-    util.log('difference between new and old events');
-    util.log(util.inspect(results));
-    var i=0;
-    for(;i<2;i++){
-        var event=JSON.parse(results[i]);
+    util.log('difference between new and old events:'+util.inspect(results));
+    results.forEach(function(result,index){
+        var event=JSON.parse(result);
         util.log('Parsed='+util.inspect(event));
+        //temporary for API limit
+        if(index>2){return;}
         fanfeedr.getEventDetails(event.id,function(er,data){
             event.status=data.status;
             event.score=data.home_team.score+':'+data.away_team.score;
-            store.sadd('lastevents_full',JSON.stringify(event));
+            var eventSerialized=JSON.stringify(event)l
+            store.sadd('lastevents_full',eventSerialized);
+            pub.publish('lastevents',eventSerialized);
         });
-    }
+    });
     store.rename('lastevents_new','lastevents_old',redis.print);
 };
 util.log('started score results scrapper');

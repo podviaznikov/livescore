@@ -25,7 +25,7 @@ io.of('/eventsLast').on('connection',function(socket){
     sub.on('message',function(pattern,key){
         util.log(util.inspect(pattern));
         util.log(util.inspect(key));
-        console.log('SPORT EVENTS SHOULD BE SEND');
+        console.log('SPORT EVENT SHOULD BE SEND');
         socket.emit('news',key);
     });
 });
