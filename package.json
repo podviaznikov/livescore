@@ -1,5 +1,5 @@
 { "name"          : "livescore",
-  "description"   : "Sport livescores based on FanFeedr Node.js",
+  "description"   : "Sport livescores based on FanFeedr Node.js API",
   "author"        : "Anton Podviaznikov <podviaznikov@gmail.com>",
   "url"           : "https://github.com/podviaznikov/soundcloud-node",
   "keywords"      : ["fanfeedr", "socket.io", "api", "api-client", "fanfeedr.com"],
