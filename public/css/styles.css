@@ -1,10 +1,29 @@
+html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,small, strong,
+sub, sup, var, b, i, dl, dt, dd, ol, ul, li,fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details,
+figcaption, figure,footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section
+{
+    display: block;
+}
 @font-face
 {
     font-family:Header Teletext; src: url('header.ttf');
 }
 @font-face
 {
-    font-family:Regular Teletext; src: url('text.ttf');
+    font-family:Regular Teletext; src: url('teletext.ttf');
 }
 body
 {
@@ -12,7 +31,86 @@ body
     background-color:black;
     color:green;
 }
-h1
+body header
+{
+    text-align:center;
+}
+body header h1
 {
     font-family:Header Teletext;
+    text-transform:uppercase;
+    font-size:78px;
+}
+body header nav
+{
+    text-align:right;
+    margin-bottom:10px;
+}
+nav ul li
+{
+    display:inline-block;
+    font-size:20px;
+    cursor:pointer;
+    margin:10px 20px 10px 0px;
+    text-transform: uppercase;
+}
+nav ul li a,nav ul li a:visited
+{
+    color:blue;
+}
+#results
+{
+    text-align:center;
+}
+#results section.events_board
+{
+    display:none;
+}
+#results section.events_board:target
+{
+    display:block;
+}
+.score
+{
+    display:inline-block;
+    color:green;
+    margin: 0px 10px;
+    width:50px;
+    margin:0px 20px;
+}
+.date
+{
+    display:inline-block;
+    color:green;
+    margin: 0px 10px;
+    width:120px;
+    margin:0px 20px;
+}
+.team
+{
+    display:inline-block;
+    text-align:left;
+    color:white;
+    min-width:250px
+}
+a,a:visited,a:hover
+{
+    text-decoration:none;
+    color:white;
+    cursor:pointer;
+}
+footer
+{
+    margin:0px auto;
+    width:100%;
+    position:fixed;
+    bottom:0px;
+    text-align:center;
+    color:white;
+}
+footer section
+{
+    background-color:red;
+    margin:18px;
+    padding: 10px 0px;
 }

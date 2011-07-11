@@ -18,24 +18,72 @@ app.configure(function(){
     app.use(express.static(__dirname+'/public'));
 });
 
-sub.subscribe('lastevents')
+//last
+sub.subscribe('events:last:added');
+//upcoming
+sub.subscribe('events:upcoming:added');
+sub.subscribe('events:upcoming:removed');
+//current
+sub.subscribe('events:current:added');
+sub.subscribe('events:current:removed');
+
 util.log('Server started!');
 app.listen(80);
 
 io.of('/eventsLast').on('connection',function(socket){
-    store.smembers('lastevents_full',function(err,events){
+    store.zrange('events:last:full',0,-1,function(err,events){
         events.forEach(function(event,index){
-            socket.emit('result',event);
+            socket.emit('added',event);
         });
     });
     sub.on('message',function(pattern,key){
         util.log(util.inspect(pattern));
         util.log(util.inspect(key));
-        console.log('SPORT EVENT SHOULD BE SEND');
-        socket.emit('result',key);
+        if('events:last:added'===pattern){
+            console.log('SPORT EVENT SHOULD BE SEND');
+            socket.emit('added',key);
+        }
     });
 });
 io.of('/eventsNow').on('connection',function(socket){
+    store.zrange('events:current',0,-1,function(err,events){
+        events.forEach(function(event,index){
+            socket.emit('added',event);
+        });
+    });
+
+    sub.on('message',function(pattern,key){
+        util.log(util.inspect(pattern));
+        util.log(util.inspect(key));
+        if('events:current:added'===pattern){
+            console.log('SPORT EVENT SHOULD BE SEND');
+            socket.emit('added',key);
+        }
+        if('events:current:removed'===pattern){
+            console.log('SPORT EVENT SHOULD BE SEND');
+            socket.emit('removed',key);
+        }
+    });
+
 });
-io.of('/eventsNext').on('connection',function(socket){
+io.of('/eventsUpcoming').on('connection',function(socket){
+    store.zrange('events:upcoming',0,-1,function(err,events){
+        events.forEach(function(event,index){
+            socket.emit('added',event);
+        });
+    });
+
+    sub.on('message',function(pattern,key){
+        util.log(util.inspect(pattern));
+        util.log(util.inspect(key));
+        if('events:upcoming:added'===pattern){
+            console.log('SPORT EVENT SHOULD BE SEND');
+            socket.emit('added',key);
+        }
+        if('events:upcoming:removed'===pattern){
+            console.log('SPORT EVENT SHOULD BE SEND');
+            socket.emit('removed',key);
+        }
+    });
+
 });
