@@ -13,7 +13,7 @@ app.configure(function(){
     app.use(express.bodyParser());
     //session support
     app.use(express.cookieParser());
-    app.use(express.session({secret: 'super_hard_session_secret',cookie:{ path: '/', httpOnly: true, maxAge: 14400000000000000 }}));
+    //app.use(express.session({secret: 'super_hard_session_secret',cookie:{ path: '/', httpOnly: true, maxAge: 14400000000000000 }}));
     //public folder for static files
     app.use(express.static(__dirname+'/public'));
 });
@@ -30,7 +30,7 @@ sub.subscribe('events:current:removed');
 util.log('Server started!');
 app.listen(80);
 
-io.of('/eventsLast').on('connection',function(socket){
+io.of('/events-last').on('connection',function(socket){
     store.zrange('events:last:full',0,-1,function(err,events){
         events.forEach(function(event,index){
             socket.emit('added',event);
@@ -45,7 +45,7 @@ io.of('/eventsLast').on('connection',function(socket){
         }
     });
 });
-io.of('/eventsNow').on('connection',function(socket){
+io.of('/events-current').on('connection',function(socket){
     store.zrange('events:current',0,-1,function(err,events){
         events.forEach(function(event,index){
             socket.emit('added',event);
@@ -66,7 +66,7 @@ io.of('/eventsNow').on('connection',function(socket){
     });
 
 });
-io.of('/eventsUpcoming').on('connection',function(socket){
+io.of('/events-upcoming').on('connection',function(socket){
     store.zrange('events:upcoming',0,-1,function(err,events){
         events.forEach(function(event,index){
             socket.emit('added',event);

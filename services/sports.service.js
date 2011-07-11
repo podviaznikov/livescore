@@ -6,10 +6,11 @@ var util=require('util'),
     store=redis.createClient(),
     pub=redis.createClient();
 
-fanfeedr.init('favb9uncnwxcdw52ptsqvn82',fanfeedr.tiers.bronze,true);
+fanfeedr.init('',fanfeedr.tiers.bronze,true);
 
-exports.getLastFootballResults=function(){
+exports.getLastFootballEvents=function(){
     fanfeedr.lastSportEvents(fanfeedrData.sports.football,function(err,data){
+
         if(!err && data){
             var i=0;
             for(;i<data.length;i++){
@@ -29,7 +30,7 @@ exports.getLastFootballResults=function(){
     });
 };
 
-exports.getUpcomingFootballResults=function(){
+exports.getUpcomingFootballEvents=function(){
     fanfeedr.nextSportEvents(fanfeedrData.sports.football,function(err,data){
         if(!err && data){
             var i=0,
@@ -59,7 +60,7 @@ exports.getUpcomingFootballResults=function(){
                     results.forEach(function(result,index){
                         if(_.indexOf(eventsArray,result)===-1){
                             store.zrem('events:upcoming',result,redis.print);
-                            pub.publish('events:upcoming:removed',result);
+                            pub.publish('events:upcoming:removed',JSON.parse(result).id);
                         }
                     });
                 }
@@ -70,7 +71,7 @@ exports.getUpcomingFootballResults=function(){
 };
 
 
-exports.getCurrentFootballResults=function(){
+exports.getCurrentFootballEvents=function(){
     fanfeedr.todaySportEvents(fanfeedrData.sports.football,function(err,data){
         if(!err && data){
             var i=0,
@@ -100,7 +101,7 @@ exports.getCurrentFootballResults=function(){
                     results.forEach(function(result,index){
                         if(_.indexOf(eventsArray,result)===-1){
                             store.zrem('events:current',result,redis.print);
-                            pub.publish('events:current:removed',result);
+                            pub.publish('events:current:removed',JSON.parse(result).id);
                         }
                     });
                 }

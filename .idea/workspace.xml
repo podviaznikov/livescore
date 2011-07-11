@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40a82bb5-c27f-455e-a1d9-a34cb81ce29f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/data.scrapper.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/streamer.js" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/node_modules/.bin/nodeunit" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/node_modules/.bin/vows" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/node_modules/nodeunit/.gitignore" afterPath="" />
@@ -80,17 +80,12 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/node_modules/vows/package.json" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/node_modules/vows/test/assert-test.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/node_modules/vows/test/vows-test.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/README.md" afterPath="$PROJECT_DIR$/node_modules/fanfeedr/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/lib/fanfeedr.js" afterPath="$PROJECT_DIR$/node_modules/fanfeedr/lib/fanfeedr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/package.json" afterPath="$PROJECT_DIR$/node_modules/fanfeedr/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/fanfeedr/tests/api_tests.js" afterPath="$PROJECT_DIR$/node_modules/fanfeedr/tests/api_tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/styles.css" afterPath="$PROJECT_DIR$/public/css/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controller.js" afterPath="$PROJECT_DIR$/public/js/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/libs.bundle.js" afterPath="$PROJECT_DIR$/public/js/libs.bundle.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/models.js" afterPath="$PROJECT_DIR$/public/js/models.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/views.js" afterPath="$PROJECT_DIR$/public/js/views.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/data.scrapper.js" afterPath="$PROJECT_DIR$/services/data.scrapper.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/sports.service.js" afterPath="$PROJECT_DIR$/services/sports.service.js" />
     </list>
     <ignored path="livescore.iws" />
@@ -150,24 +145,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="24" selection-start="1088" selection-end="1095" vertical-scroll-proportion="-9.916667">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="styles.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/styles.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="23" selection-start="1085" selection-end="1085" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="fanfeedr.data.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/fanfeedr.data.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -177,19 +154,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sports.service.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="sports.service.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/services/sports.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="18" selection-start="2849" selection-end="2849" vertical-scroll-proportion="0.0">
+            <state line="8" column="15" selection-start="240" selection-end="240" vertical-scroll-proportion="0.21937843">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data.scrapper.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="data.scrapper.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/data.scrapper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="33" selection-start="254" selection-end="254" vertical-scroll-proportion="0.19886364">
+            <state line="7" column="38" selection-start="297" selection-end="297" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -207,7 +184,7 @@
       <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="26" selection-start="1963" selection-end="1963" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -225,7 +202,25 @@
       <file leaf-file-name="controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="23" selection-start="1185" selection-end="1185" vertical-scroll-proportion="0.0">
+            <state line="4" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="28" selection-start="502" selection-end="502" vertical-scroll-proportion="-7.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="streamer.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/streamer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="45" selection-start="104" selection-end="104" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -234,7 +229,7 @@
       <file leaf-file-name="models.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/models.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="24" selection-start="398" selection-end="398" vertical-scroll-proportion="0.0">
+            <state line="13" column="24" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -258,13 +253,14 @@
         <option value="$PROJECT_DIR$/public/js/libs.bundle.js" />
         <option value="$PROJECT_DIR$/services/scrapper.node.js" />
         <option value="$PROJECT_DIR$/public/css/styles.css" />
-        <option value="$PROJECT_DIR$/public/js/models.js" />
-        <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/public/js/controller.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/services/sports.service.js" />
         <option value="$PROJECT_DIR$/public/js/views.js" />
+        <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/public/js/models.js" />
+        <option value="$PROJECT_DIR$/public/js/controller.js" />
+        <option value="$PROJECT_DIR$/public/js/streamer.js" />
         <option value="$PROJECT_DIR$/services/data.scrapper.js" />
+        <option value="$PROJECT_DIR$/services/sports.service.js" />
       </list>
     </option>
   </component>
@@ -298,9 +294,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Favorites" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -486,8 +482,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="24" width="1368" height="721" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="24" width="1366" height="720" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51304346" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -497,7 +493,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14958239" sideWeight="0.4869565" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14958239" sideWeight="0.4869565" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -568,60 +564,9 @@
         <state line="76" column="0" selection-start="115294" selection-end="115294" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/livescore.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="23" selection-start="1085" selection-end="1085" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/models.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="24" selection-start="398" selection-end="398" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="26" selection-start="1963" selection-end="1963" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="23" selection-start="1185" selection-end="1185" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/sports.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="18" selection-start="2849" selection-end="2849" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="24" selection-start="1088" selection-end="1095" vertical-scroll-proportion="-9.916667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/views.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="50" selection-start="642" selection-end="642" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="46" column="23" selection-start="1085" selection-end="1085" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/fanfeedr.data.js">
@@ -629,9 +574,61 @@
         <state line="30" column="414" selection-start="4476" selection-end="4476" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/livescore.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/views.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="50" selection-start="642" selection-end="642" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="28" selection-start="502" selection-end="502" vertical-scroll-proportion="-7.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/models.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="24" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/streamer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="45" selection-start="104" selection-end="104" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/services/data.scrapper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="33" selection-start="254" selection-end="254" vertical-scroll-proportion="0.19886364">
+        <state line="7" column="38" selection-start="297" selection-end="297" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/sports.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="15" selection-start="240" selection-end="240" vertical-scroll-proportion="0.21937843">
           <folding />
         </state>
       </provider>
