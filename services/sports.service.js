@@ -6,11 +6,10 @@ var util=require('util'),
     store=redis.createClient(),
     pub=redis.createClient();
 
-fanfeedr.init('',fanfeedr.tiers.bronze,true);
+fanfeedr.init('favb9uncnwxcdw52ptsqvn82',fanfeedr.tiers.bronze,true);
 
 exports.getLastFootballEvents=function(){
     fanfeedr.lastSportEvents(fanfeedrData.sports.football,function(err,data){
-
         if(!err && data){
             var i=0;
             for(;i<data.length;i++){
