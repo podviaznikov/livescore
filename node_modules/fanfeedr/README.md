@@ -4,19 +4,18 @@ Node.js API client for FanFeedr platform.
 
 API reference can be found here: http://developer.fanfeedr.com/docs/read/Welcome_to_the_FanFeedr_Sports_API
 
-Currently most of the API are implemented in Node.js. Geo, Content are missing but will be implemented shortly.
+Currently 100% of the API are implemented in Node.js.
 
 In API we use standard Node.js convention: callback of each API call is the last function parameter. Callback takes two
 parameters: error and data. One parameter should be always undefined.
 
 
-Also please note that we changes some naming: so leagues became sport and conferences -> leagues.
+Also please note that we changed some naming: so leagues became sport and conferences -> leagues.
 
 # TO-DO
 
 Add more tests.
 
-Add documentation for self-annotated source code.
 
 ## License
 

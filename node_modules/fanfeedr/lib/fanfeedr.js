@@ -1,5 +1,6 @@
 var util=require('util'),
     rest=require('restler'),
+    querystring=require('querystring'),
     fanfeedr=exports;
 //init fanfeedr client with key and specified tier(basic by default)
 fanfeedr.init=function(key,tier,debug){
@@ -39,7 +40,9 @@ fanfeedr.resources={
     person:ResourceBuilder.newType('persons'),
     image:ResourceBuilder.newType('images'),
     source:ResourceBuilder.newType('sources'),
-    trending:ResourceBuilder.newType('trending')
+    trending:ResourceBuilder.newType('trending'),
+    content:ResourceBuilder.newType('content'),
+    geo:ResourceBuilder.newType('geo')
 };
 
 //tiers for the API. Ref: http://developer.fanfeedr.com/page/API_Plans_and_Pricing
@@ -49,6 +52,24 @@ fanfeedr.tiers={
     silver:'silver',
     gold:'gold',
     enterprise:'enterprise'
+};
+
+fanfeedr.contentFilters={
+    //News returns non-blog mainstream news content.
+    news:'News',
+    blog:'Blog',
+    columnists:'Columnists',
+    video:'Video',
+    //Fantasy returns fantasy sports content.
+    fantasy:'Fantasy',
+    //Recruiting returns player transaction content.
+    recruiting:'Recruiting'
+};
+
+fanfeedr.seasonTypes={
+    preseason:'Preseason',
+    season:'Season',
+    postseason:'Postseason'
 };
 // Sports
 // -------------
@@ -116,7 +137,46 @@ fanfeedr.getTeamStandings=function(teamId,callback){
 };
 // Events
 // -------------
-
+//sport events
+fanfeedr.getSportEvents=function(sportId,callback){
+    jsonRequest(this.resources.sport.child(sportId)+this.resources.event.path(),callback);
+};
+//league events
+fanfeedr.getLeagueEvents=function(leagueId,callback){
+    jsonRequest(this.resources.league.child(leagueId)+this.resources.event.path(),callback);
+};
+//conference events
+fanfeedr.getConferenceEvents=function(conferenceId,callback){
+    jsonRequest(this.resources.conference.child(conferenceId)+this.resources.event.path(),callback);
+};
+//team events
+fanfeedr.getTeamEvents=function(teamId,callback){
+    jsonRequest(this.resources.team.child(teamId)+this.resources.event.path(),callback);
+};
+//geo events
+fanfeedr.getGeoEvents=function(geoId,callback){
+    jsonRequest(this.resources.geo.child(geoId)+this.resources.event.path(),callback);
+};
+//filtered sport events
+fanfeedr.getSportEvents=function(sportId,seasonType,callback){
+    jsonRequest(this.resources.sport.child(sportId)+this.resources.event.path()+'/'+seasonType,callback);
+};
+//filtered league events
+fanfeedr.getLeagueEvents=function(leagueId,seasonType,callback){
+    jsonRequest(this.resources.league.child(leagueId)+this.resources.event.path()+'/'+seasonType,callback);
+};
+//filtered conference events
+fanfeedr.getConferenceEvents=function(conferenceId,seasonType,callback){
+    jsonRequest(this.resources.conference.child(conferenceId)+this.resources.event.path()+'/'+seasonType,callback);
+};
+//filtered team events
+fanfeedr.getTeamEvents=function(teamId,seasonType,callback){
+    jsonRequest(this.resources.team.child(teamId)+this.resources.event.path()+'/'+seasonType,callback);
+};
+//filtered geo events
+fanfeedr.getGeoEvents=function(geoId,seasonType,callback){
+    jsonRequest(this.resources.geo.child(geoId)+this.resources.event.path()+'/'+seasonType,callback);
+};
 //last events for sport
 fanfeedr.lastSportEvents=function(sportId,callback){
     jsonRequest(this.resources.sport.child(sportId)+this.resources.event.path()+'/last',callback);
@@ -141,6 +201,42 @@ fanfeedr.todayLeagueEvents=function(leagueId,callback){
 fanfeedr.nextLeagueEvents=function(leagueId,callback){
     jsonRequest(this.resources.league.child(leagueId)+this.resources.event.path()+'/next',callback);
 };
+//last events for division
+fanfeedr.lastDivisionEvents=function(divisionId,callback){
+    jsonRequest(this.resources.division.child(divisionId)+this.resources.event.path()+'/last',callback);
+};
+//today events for division
+fanfeedr.todayDivisionEvents=function(divisionId,callback){
+    jsonRequest(this.resources.division.child(divisionId)+this.resources.event.path()+'/today',callback);
+};
+//next events for division
+fanfeedr.nextDivisionEvents=function(divisionId,callback){
+    jsonRequest(this.resources.division.child(divisionId)+this.resources.event.path()+'/next',callback);
+};
+//last events for team
+fanfeedr.lastTeamEvents=function(teamId,callback){
+    jsonRequest(this.resources.team.child(teamId)+this.resources.event.path()+'/last',callback);
+};
+//today events for team
+fanfeedr.todayTeamEvents=function(teamId,callback){
+    jsonRequest(this.resources.team.child(teamId)+this.resources.event.path()+'/today',callback);
+};
+//next events for team
+fanfeedr.nextTeamEvents=function(teamId,callback){
+    jsonRequest(this.resources.team.child(teamId)+this.resources.event.path()+'/next',callback);
+};
+//last events for geo object
+fanfeedr.lastGeoEvents=function(geoId,callback){
+    jsonRequest(this.resources.geo.child(geoId)+this.resources.event.path()+'/last',callback);
+};
+//today events for geo object
+fanfeedr.todayGeoEvents=function(geoId,callback){
+    jsonRequest(this.resources.geo.child(geoId)+this.resources.event.path()+'/today',callback);
+};
+//next events for geo object
+fanfeedr.nextGeoEvents=function(geoId,callback){
+    jsonRequest(this.resources.geo.child(geoId)+this.resources.event.path()+'/next',callback);
+};
 //full event info. http://developer.fanfeedr.com/docs/read/GET_parent_resource_resource_id_events_id
 fanfeedr.getEvent=function(eventId,callback){
     jsonRequest(this.resources.event.child(eventId),callback);
@@ -153,7 +249,7 @@ fanfeedr.getEventBoxscore=function(eventId,callback){
 fanfeedr.getEventRecap=function(eventId,callback){
     jsonRequest(this.resources.event.child(eventId)+'/recap',callback);
 };
-// Perosns
+// Persons
 // -------------
 
 //get all persons for sport. http://developer.fanfeedr.com/docs/read/Persons_Resources
@@ -259,9 +355,96 @@ fanfeedr.getDivisionTrendingPersons=function(divisionId,callback){
 fanfeedr.getTeamTrendingPersons=function(teamId,callback){
      jsonRequest(this.resources.team.child(teamId)+this.resources.trending.path()+this.resources.person.path(),callback);
 };
+// Content
+// -------------
 
-var jsonRequest=function(resource,callback){
-    var url='http://ffapi.fanfeedr.com/'+fanfeedr.tier+'/api/'+ resource+'?api_key='+fanfeedr.key;
+// Get content for some sport. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getSportContent=function(sportId,callback){
+    jsonRequest(this.resources.sport.child(sportId)+this.resources.content.path(),callback);
+};
+// Get content for some league. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getLeagueContent=function(leagueId,callback){
+    jsonRequest(this.resources.league.child(leagueId)+this.resources.content.path(),callback);
+};
+// Get content for some division. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getDivisionContent=function(divisionId,callback){
+    jsonRequest(this.resources.division.child(divisionId)+this.resources.content.path(),callback);
+};
+// Get content for some division. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getTeamContent=function(teamId,callback){
+    jsonRequest(this.resources.team.child(teamId)+this.resources.content.path(),callback);
+};
+// Get content for some person. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getPersonContent=function(personId,callback){
+    jsonRequest(this.resources.person.child(personId)+this.resources.content.path(),callback);
+};
+// Get content for some source. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getSourceContent=function(sourceId,callback){
+    jsonRequest(this.resources.source.child(sourceId)+this.resources.content.path(),callback);
+};
+// Get content for some geo. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getGeoContent=function(geoId,callback){
+    jsonRequest(this.resources.geo.child(geoId)+this.resources.content.path(),callback);
+};
+//Get detailed  information about single content.http://developer.fanfeedr.com/docs/read/GET_parent_resource_resource_id_content_id
+fanfeedr.getContent=function(contentId,callback){
+    jsonRequest(this.resources.content.child(contentId),callback);
+};
+//Get related content to teh specified content.http://developer.fanfeedr.com/docs/read/GET_parent_resource_resource_id_content_id_related
+fanfeedr.getRelatedContent=function(contentId,callback){
+    jsonRequest(this.resources.content.child(contentId)+'/related',callback);
+};
+
+// Get filtered content for some sport. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getFilteredSportContent=function(sportId,filter,callback){
+    jsonRequest(this.resources.sport.child(sportId)+this.resources.content.path()+'/'+filter,callback);
+};
+// Get filtered content for some league. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getFilteredLeagueContent=function(leagueId,filter,callback){
+    jsonRequest(this.resources.league.child(leagueId)+this.resources.content.path()+'/'+filter,callback);
+};
+// Get filtered content for some division. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getFilteredDivisionContent=function(divisionId,filter,callback){
+    jsonRequest(this.resources.division.child(divisionId)+this.resources.content.path()+'/'+filter,callback);
+};
+// Get filtered content for some division. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getFilteredTeamContent=function(teamId,filter,callback){
+    jsonRequest(this.resources.team.child(teamId)+this.resources.content.path()+'/'+filter,callback);
+};
+// Get filtered content for some person. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getFilteredPersonContent=function(personId,filter,callback){
+    jsonRequest(this.resources.person.child(personId)+this.resources.content.path()+'/'+filter,callback);
+};
+// Get filtered content for some source. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getFilteredSourceContent=function(sourceId,filter,callback){
+    jsonRequest(this.resources.source.child(sourceId)+this.resources.content.path()+'/'+filter,callback);
+};
+// Get filtered content for some geo. http://developer.fanfeedr.com/docs/read/Content_Resources
+fanfeedr.getFilteredGeoContent=function(geoId,filter,callback){
+    jsonRequest(this.resources.geo.child(geoId)+this.resources.content.path()+'/'+filter,callback);
+};
+// Geo
+// -------------
+//Get geo object by query. http://developer.fanfeedr.com/docs/read/Geo_Resources
+fanfeedr.getGeoObjects=function(query,callback){
+    jsonRequest(this.resources.geo.name,callback,{q:query});
+};
+//Get geo object by latitude and longitude. http://developer.fanfeedr.com/docs/read/Geo_Resources
+fanfeedr.getGeoObjectsByCoordinates=function(lat,long,callback){
+    jsonRequest(this.resources.geo.name,callback,{lat:lat,long:long});
+};
+//Get details about geo object. http://developer.fanfeedr.com/docs/read/GET_geo_id
+fanfeedr.getGeoObject=function(geoId,callback){
+    jsonRequest(this.resources.geo.child(geoId),callback);
+};
+//Get teams for geo object. http://developer.fanfeedr.com/docs/read/GET_geo_id_teams
+fanfeedr.getGeoTeams=function(geoId,callback){
+    jsonRequest(this.resources.geo.child(geoId)+this.resources.team.path(),callback);
+};
+var jsonRequest=function(resource,callback,params){
+    params=params||{};
+    params.api_key=fanfeedr.key;
+    var url='http://ffapi.fanfeedr.com/'+fanfeedr.tier+'/api/'+ resource+'?'+querystring.stringify(params);
     rest.get(url)
         .on('complete',function(data){
             if(fanfeedr.debug){
