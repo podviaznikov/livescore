@@ -74,3 +74,76 @@ f.uniqueId("view");this._configure(a||{});this._ensureElement();this.delegateEve
 g(this.el).get(0)}else{var a=this.attributes||{};if(this.id)a.id=this.id;if(this.className)a["class"]=this.className;this.el=this.make(this.tagName,a)}}});e.Model.extend=e.Collection.extend=e.Router.extend=e.View.extend=function(a,b){var c=v(this,a,b);c.extend=this.extend;return c};var w={create:"POST",update:"PUT","delete":"DELETE",read:"GET"};e.sync=function(a,b,c){var d=w[a];c=f.extend({type:d,dataType:"json",processData:!1},c);if(!c.url)c.url=k(b)||l();if(!c.data&&b&&(a=="create"||a=="update"))c.contentType=
 "application/json",c.data=JSON.stringify(b.toJSON());if(e.emulateJSON)c.contentType="application/x-www-form-urlencoded",c.processData=!0,c.data=c.data?{model:c.data}:{};if(e.emulateHTTP&&(d==="PUT"||d==="DELETE")){if(e.emulateJSON)c.data._method=d;c.type="POST";c.beforeSend=function(a){a.setRequestHeader("X-HTTP-Method-Override",d)}}return g.ajax(c)};var o=function(){},v=function(a,b,c){var d;d=b&&b.hasOwnProperty("constructor")?b.constructor:function(){return a.apply(this,arguments)};f.extend(d,
 a);o.prototype=a.prototype;d.prototype=new o;b&&f.extend(d.prototype,b);c&&f.extend(d,c);d.prototype.constructor=d;d.__super__=a.prototype;return d},k=function(a){if(!a||!a.url)return null;return f.isFunction(a.url)?a.url():a.url},l=function(){throw Error('A "url" property or function must be specified');},i=function(a,b,c){return function(d){a?a(b,d,c):b.trigger("error",b,d,c)}}}).call(this);
+/**(c) 2011 Enginimation Studio (http://enginimation.com). May be freely distributed under the MIT license.*/
+/*global Backbone: true, io: true, JSON:true */
+"use strict";
+//streaming backbone collection. Preconditions: socket.io should be included.
+Backbone.StreamingCollection=Backbone.Collection.extend({
+
+    //initialize all channels for collection
+    initialize:function(){
+        var self=this,
+            channel=io.connect(this.url);
+        //new model should be added
+        channel.on('added',function(attributes){
+            var modelInstance=new self.model(attributes);
+            self.add(modelInstance);
+        });
+        //model should be removed
+        channel.on('removed',function(id){
+            var modelToRemove=self.get(id);
+            if(modelToRemove){
+                self.remove([modelToRemove]);
+            }
+        });
+        //model should be updated
+        channel.on('updated',function(attributes){
+            var modelToUpdate=self.get(id);
+            if(modelToUpdate){
+                modelToUpdate.set(attributes);
+            }
+        });
+        channel.on('reset',function(models){
+            self.reset(models);
+        });
+    }
+});
+/**(c) 2011 Enginimation Studio (http://enginimation.com). May be freely distributed under the MIT license.*/
+/*global Backbone: true,$:true */
+Backbone.View.prototype.hide=function(){
+    this.$(this.el).hide();
+    return this;
+};
+Backbone.View.prototype.show=function(){
+    this.$(this.el).show();
+    return this;
+};
+Backbone.View.prototype.html=function(html){
+    this.$(this.el).html(html);
+    return this;
+};
+Backbone.View.prototype.initialize=function(){
+    _.bindAll(this,'render','renderTpl');
+    if(this.tplId){
+        this.tpl=$('#'+this.tplId).html();
+    }
+};
+Backbone.View.prototype.tplId='';
+Backbone.View.prototype.render=function(){
+    this.renderTpl();
+    return this;
+};
+Backbone.View.prototype.renderTpl=function(model){
+    var modelToRender=model || this.model.toJSON();
+    if(this.tpl && modelToRender){
+        var html=_.template(this.tpl,modelToRender);
+        this.html(html);
+    }
+    return this;
+};
+Backbone.ModelView=Backbone.View.extend({
+    initialize:function(){
+        Backbone.View.prototype.initialize.apply(this,arguments);
+        this.model.view=this;
+    }
+});

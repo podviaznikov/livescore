@@ -6,9 +6,9 @@ var util=require('util'),
     store=redis.createClient(),
     pub=redis.createClient();
 
-fanfeedr.init('favb9uncnwxcdw52ptsqvn82',fanfeedr.tiers.bronze,true);
+fanfeedr.init('',fanfeedr.tiers.bronze,true);
 
-exports.getLastFootballEvents=function(){
+exports.getLatestFootballEvents=function(){
     fanfeedr.lastSportEvents(fanfeedrData.sports.football,function(err,data){
         if(!err && data){
             var i=0;
@@ -22,9 +22,9 @@ exports.getLastFootballEvents=function(){
                         date:event.date
                     },
                     eventDataStr=JSON.stringify(eventData);
-               store.sadd('events:last:new',eventDataStr,redis.print);
+               store.sadd('events-latest:new',eventDataStr,redis.print);
             }
-            store.sinter('events:last:new','events:last:old',handleDifferenceNewLastEvents);
+            store.sinter('events-latest:new','events-latest:old',handleDifferenceNewLastEvents);
         }
     });
 };
@@ -47,19 +47,19 @@ exports.getUpcomingFootballEvents=function(){
                     },
                     eventDataStr=JSON.stringify(eventData);
                     eventsArray[i]=eventDataStr;
-                    store.zadd('events:upcoming',Date.parse(eventData.date),eventDataStr,function(er,reply){
+                    store.zadd('events-upcoming:all',Date.parse(eventData.date),eventDataStr,function(er,reply){
                         util.log('Adding upcoming event with reply '+reply);
                         if(!er && reply===1){
-                            pub.publish('events:upcoming:added',eventDataStr);
+                            pub.publish('events-upcoming:added',eventDataStr);
                         }
                     });
             }
-            store.zrange('events:upcoming',0,-1,function(er,results){
+            store.zrange('events-upcoming:all',0,-1,function(er,results){
                 if(!er && results){
                     results.forEach(function(result,index){
                         if(_.indexOf(eventsArray,result)===-1){
-                            store.zrem('events:upcoming',result,redis.print);
-                            pub.publish('events:upcoming:removed',JSON.parse(result).id);
+                            store.zrem('events-upcoming:all',result,redis.print);
+                            pub.publish('events-upcoming:removed',JSON.parse(result).id);
                         }
                     });
                 }
@@ -88,19 +88,19 @@ exports.getCurrentFootballEvents=function(){
                     },
                     eventDataStr=JSON.stringify(eventData);
                     eventsArray[i]=eventDataStr;
-                    store.zadd('events:current',Date.parse(eventData.date),eventDataStr,function(er,reply){
+                    store.zadd('events-current:all',Date.parse(eventData.date),eventDataStr,function(er,reply){
                         util.log('Adding upcoming event with reply '+reply);
                         if(!er && reply===1){
-                            pub.publish('events:current:added',eventDataStr);
+                            pub.publish('events-current:added',eventDataStr);
                         }
                     });
             }
-            store.zrange('events:current',0,-1,function(er,results){
+            store.zrange('events-current',0,-1,function(er,results){
                 if(!er && results){
                     results.forEach(function(result,index){
                         if(_.indexOf(eventsArray,result)===-1){
-                            store.zrem('events:current',result,redis.print);
-                            pub.publish('events:current:removed',JSON.parse(result).id);
+                            store.zrem('events-current:all',result,redis.print);
+                            pub.publish('events-current:removed',JSON.parse(result).id);
                         }
                     });
                 }
@@ -121,11 +121,11 @@ function handleDifferenceNewLastEvents(err,results){
                 event.away=data.away_team.name;
                 event.score=data.home_team.score+':'+data.away_team.score;
                 var eventSerialized=JSON.stringify(event);
-                store.zadd('events:last:full',Date.parse(event.date),eventSerialized);
-                pub.publish('events:last:added',eventSerialized);
+                store.zadd('events-latest:all',Date.parse(event.date),eventSerialized);
+                pub.publish('events-latest:added',eventSerialized);
             }
         });
     });
-    store.rename('events:last:new','events:last:old',redis.print);
+    store.rename('events-latest:new','events-latest:old',redis.print);
 };
 util.log('started score results scrapper');

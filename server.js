@@ -1,11 +1,14 @@
 var util=require('util'),
     express=require('express'),
     socketIo=require('socket.io'),
-    redis=require('redis'),
-    store=redis.createClient(),
-    sub=redis.createClient(),
+    streamer=require('./streamer'),
     app=express.createServer(),
-    io=socketIo.listen(app);
+    io=socketIo.listen(app),
+    //define streams
+    latestEventsStream=streamer.defineStream('events-latest'),
+    currentEventsStream=streamer.defineStream('events-current'),
+    upcomingEventsStream=streamer.defineStream('events-upcoming');
+
 
 app.configure(function(){
     app.use(express.logger());
@@ -18,72 +21,7 @@ app.configure(function(){
     app.use(express.static(__dirname+'/public'));
 });
 
-//last
-sub.subscribe('events:last:added');
-//upcoming
-sub.subscribe('events:upcoming:added');
-sub.subscribe('events:upcoming:removed');
-//current
-sub.subscribe('events:current:added');
-sub.subscribe('events:current:removed');
+streamer.initStreams(io,[latestEventsStream,currentEventsStream,upcomingEventsStream]);
 
 util.log('Server started!');
-app.listen(80);
-
-io.of('/events-last').on('connection',function(socket){
-    store.zrange('events:last:full',0,-1,function(err,events){
-        events.forEach(function(event,index){
-            socket.emit('added',event);
-        });
-    });
-    sub.on('message',function(pattern,key){
-        util.log(util.inspect(pattern));
-        util.log(util.inspect(key));
-        if('events:last:added'===pattern){
-            console.log('SPORT EVENT SHOULD BE SEND');
-            socket.emit('added',key);
-        }
-    });
-});
-io.of('/events-current').on('connection',function(socket){
-    store.zrange('events:current',0,-1,function(err,events){
-        events.forEach(function(event,index){
-            socket.emit('added',event);
-        });
-    });
-
-    sub.on('message',function(pattern,key){
-        util.log(util.inspect(pattern));
-        util.log(util.inspect(key));
-        if('events:current:added'===pattern){
-            console.log('SPORT EVENT SHOULD BE SEND');
-            socket.emit('added',key);
-        }
-        if('events:current:removed'===pattern){
-            console.log('SPORT EVENT SHOULD BE SEND');
-            socket.emit('removed',key);
-        }
-    });
-
-});
-io.of('/events-upcoming').on('connection',function(socket){
-    store.zrange('events:upcoming',0,-1,function(err,events){
-        events.forEach(function(event,index){
-            socket.emit('added',event);
-        });
-    });
-
-    sub.on('message',function(pattern,key){
-        util.log(util.inspect(pattern));
-        util.log(util.inspect(key));
-        if('events:upcoming:added'===pattern){
-            console.log('SPORT EVENT SHOULD BE SEND');
-            socket.emit('added',key);
-        }
-        if('events:upcoming:removed'===pattern){
-            console.log('SPORT EVENT SHOULD BE SEND');
-            socket.emit('removed',key);
-        }
-    });
-
-});
+app.listen(80)

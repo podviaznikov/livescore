@@ -1,7 +1,7 @@
 var models={};
 models.LatestEvent=Backbone.Model.extend({});
 models.LatestEvents=Backbone.StreamingCollection.extend({
-    url:'/events-last',
+    url:'/events-latest',
     model:models.LatestEvent
 });
 models.UpcomingEvent=Backbone.Model.extend({});
