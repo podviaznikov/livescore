@@ -1,9 +1,17 @@
 { "name"          : "livescore",
   "description"   : "Sport livescores based on FanFeedr Node.js API",
-  "author"        : "Anton Podviaznikov <podviaznikov@gmail.com>",
-  "url"           : "https://github.com/podviaznikov/soundcloud-node",
-  "keywords"      : ["fanfeedr", "socket.io", "api", "api-client", "fanfeedr.com"],
+  "author"        : "Enginimation Studio <hello@enginimation.com> (http://enginimation.com)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enginimation/livescore-server-hook.git"
+  },
   "version"       : "0.1.0",
   "main"          : "./server",
-  "engines"       : { "node": ">= 0.4.1" }
+  "engines": {
+    "node": "~v0.4.9"
+  },
+  "dependencies": {
+    "hook.io": ">=0.7.7",
+  },
+  "devDependencies": {}
 }

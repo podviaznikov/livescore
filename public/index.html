@@ -8,6 +8,45 @@
     <meta name="keywords" content="html5,css3"/>
     <link rel="shortcut icon" href="/favicon.ico"/>
     <link rel="stylesheet" href="css/styles.css"/>
+    <script type="text/javascript" src="hook.js"></script>
+
+    <script type="text/javascript">
+
+        //
+        // TODO: Move this to hook-shim, will create magic Hook namespace
+        //
+        var Hook = require('/hook.js').Hook;
+        Hook = new Hook();
+        Hook.connect();
+
+        Hook.on('ready', function(){
+
+          //
+          // Remark: Use Hook.anAny to capture all Hook events for debugging
+          //
+          Hook.onAny(function(data){
+            console.log(data);
+          });
+
+          Hook.emit('hello', 'i am browser!');
+
+          //
+          // Remark: Some people enjoy getting callbacks for messages
+          //
+          Hook.emit('cakeRequest', 'Cake please?', function(err, result){
+            console.log(result);
+          });
+
+          Hook.emit('cakeRequest', 'I DEMAND CAKE', function(err, result){
+            console.log(result);
+          });
+
+
+        });
+
+    </script>
+
+
     <script src="js/libs.bundle.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/models.js"></script>
@@ -33,13 +72,13 @@
 <footer>
     <section>Build for you by <a href="http://enginimation.com">Enginimation Studio</a>. Powered by <a href="http://fanfeedr.com">FanFeedr</a>.</section>
 </footer>
-<script type="html/template" id="latest_result_tpl">
+<script type="text/template" id="latest_result_tpl">
     <div class="team"><%= home %></div><div class="score"><%= score %></div><div class="team"><%= away %></div><div class="date"><%= date %></div>
 </script>
-<script type="html/template" id="upcoming_result_tpl">
+<script type="text/template" id="upcoming_result_tpl">
     <div class="team"><%= home %></div><div class="date"><%= date %></div><div class="team"><%= away %></div>
 </script>
-<script type="html/template" id="current_result_tpl">
+<script type="text/template" id="current_result_tpl">
     <div class="team"><%= home %></div><div class="date"><%= date %></div><div class="team"><%= away %></div>
 </script>
 </body>
